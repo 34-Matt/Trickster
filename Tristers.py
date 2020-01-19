@@ -23,6 +23,7 @@ async def on_ready():
     for ext in initial_extension:
         bot.load_extension(ext)
         print("Loaded {}".format(ext))
+    bot.change_presence(activity=discord.Game("Awaiting my subjects"))
 
 @bot.command()
 @commands.guild_only()

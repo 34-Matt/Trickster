@@ -12,7 +12,7 @@ class Japanese(commands.Cog):
         letters = ctx.message.content.split()[1:]
         message = ""
         for letter in letters:
-            message += singleHiragana(letter)
+            message += singleHiragana(letter.lower())
         await ctx.send(message)
 
 def setup(bot):
