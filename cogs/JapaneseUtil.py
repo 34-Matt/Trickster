@@ -32,7 +32,7 @@ def conOffset(con):
 
     elif con == 's':
         return 19,2
-    elif con == 'z':
+    elif (con == 'z') or (con == 'j'):
         return 20,2
 
     elif con == 't':
@@ -106,13 +106,13 @@ def singleChar(letter,katakana):
 
     elif letNum == 3:
         if letter[1] == 'y':
-            output = singleChar(letter[0]+'i')
-            output += chr(ord(singleChar(letter[1:]))-1)
+            output = singleChar(letter[0]+'i',katakana)
+            output += chr(ord(singleChar(letter[1:]))-1,katakana)
         elif letter[0] == letter[1]:
-            output = chr(ord(singleChar('tu'))-1)
-            output += singleChar(letter[1:])
+            output = chr(ord(singleChar('tu'))-1,katakana)
+            output += singleChar(letter[1:],katakana)
         else:
-            output = singleChar(letter[0]+letter[2])
+            output = singleChar(letter[0]+letter[2],katakana)
 
     #print(output)
     #print(letNum)
