@@ -62,19 +62,24 @@ def conOffset(con):
     elif con == 'w':
         return 78,1
 
-def singleHiragana(letter):
-    '''Determines the unicode for the hirigana character.
+def singleChar(letter,katakana):
+    '''Determines the unicode for the Japanese character.
     letter is the romanji of the hiragana character
+    katakana is boolean for converting to Katakana (True) or Hiragana (False)
 
     Returns the unicode of letter
     '''
 
     letNum = len(letter)
-    output = 12352
+    if katakana:
+        output = 12448
+    else:
+        output = 12352
 
     if letNum == 1:
         if letter == 'n':
             output += 83
+            output = chr(output)
         else:
             output += (2*vowalOffset(letter))
             output = chr(output)
@@ -101,12 +106,14 @@ def singleHiragana(letter):
 
     elif letNum == 3:
         if letter[1] == 'y':
-            output = singleHiragana(letter[0]+'i')
-            output += chr(ord(singleHiragana(letter[1:]))-1)
+            output = singleChar(letter[0]+'i')
+            output += chr(ord(singleChar(letter[1:]))-1)
         elif letter[0] == letter[1]:
-            output = chr(ord(singleHiragana('tu'))-1)
-            output += singleHiragana(letter[1:])
+            output = chr(ord(singleChar('tu'))-1)
+            output += singleChar(letter[1:])
         else:
-            output = singleHiragana(letter[0]+letter[2])
+            output = singleChar(letter[0]+letter[2])
 
+    #print(output)
+    #print(letNum)
     return output
