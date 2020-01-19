@@ -8,8 +8,9 @@ descript = 'Have you come to behold my brilliance. Very well, you have my permis
 # Create bot
 bot = commands.Bot(command_prefix='$',description=descript)
 
-initial_extension = [
+initial_extension = [ # Add new cogs here
     'cogs.Japanese',
+    "cogs.Goddess",
 ]
 
 @bot.event
@@ -21,12 +22,7 @@ async def on_ready():
     print("Loading Extensions")
     for ext in initial_extension:
         bot.load_extension(ext)
-
-@bot.event
-async def on_member_join(self,member):
-        channel = member.guild.system_channel
-        if channel is not None:
-            await channel.send('Welcome {}, come to over me your praise?'.format(member))
+        print("Loaded {}".format(ext))
 
 @bot.command()
 @commands.guild_only()
@@ -48,6 +44,28 @@ async def emote(ctx):
         await ctx.send(choice(ctx.guild.emojis))
     except:
         await ctx.send("Looks like you don't have any custom emotes. This is unfit for someone of my stature.")
+
+@bot.command()
+async def load(ctx):
+    extension = ctx.message.content.split()[1]
+    try:
+        bot.load_extension("cogs."+extension)
+        print("Loaded {}".format(extension))
+        await ctx.send("Your prayers have been answered.")
+    except Exception as error:
+        print("{} cannot be loaded. [{}]".format(extension,error))
+        await ctx.send("Build me a temple, then I shall perform your task.")
+
+@bot.command()
+async def unload(ctx):
+    extension = ctx.message.content.split()[1]
+    try:
+        bot.unload_extension("cogs."+extension)
+        print("Unloaded {}".format(extension))
+        await ctx.send("Your prayers have been answered.")
+    except Exception as error:
+        print("{} cannot be unloaded. [{}]".format(extension,error))
+        await ctx.send("Who do you think I am to command me as such!")
 
 # Run bot
 with open('token.txt','r') as f:
