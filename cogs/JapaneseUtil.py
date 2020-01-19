@@ -77,6 +77,7 @@ def singleHiragana(letter):
             output += 83
         else:
             output += (2*vowalOffset(letter))
+            output = chr(output)
 
     elif letNum == 2:
         vowalOff = vowalOffset(letter[1])
@@ -96,5 +97,16 @@ def singleHiragana(letter):
         
         # Get character
         output += conOff + (multi * vowalOff)
+        output = chr(output)
 
-    return chr(output)
+    elif letNum == 3:
+        if letter[1] == 'y':
+            output = singleHiragana(letter[0]+'i')
+            output += chr(ord(singleHiragana(letter[1:]))-1)
+        elif letter[0] == letter[1]:
+            output = chr(ord(singleHiragana('tu'))-1)
+            output += singleHiragana(letter[1:])
+        else:
+            output = singleHiragana(letter[0]+letter[2])
+
+    return output

@@ -23,7 +23,7 @@ async def on_ready():
     for ext in initial_extension:
         bot.load_extension(ext)
         print("Loaded {}".format(ext))
-    bot.change_presence(activity=discord.Game("Awaiting my subjects"))
+    await bot.change_presence(activity=discord.Game("Awaiting my subjects"))
 
 @bot.command()
 @commands.guild_only()
@@ -34,6 +34,7 @@ async def info(ctx):
     embed.add_field(name="Name",value="Mayu")
     embed.add_field(name="Server count",value=f"{len(bot.guilds)}")
     embed.add_field(name="Invite",value="[Invite link](https://discordapp.com/oauth2/authorize?&client_id=347549865854763008&scope=bot&permissions=8)")
+    embed.add_field(name="Github",value="[Github link](https://github.com/34-Matt/Trickster)")
 
     await ctx.send(content=None,embed=embed)
 
