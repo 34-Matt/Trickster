@@ -25,6 +25,13 @@ async def on_ready():
         print("Loaded {}".format(ext))
     await bot.change_presence(activity=discord.Game("Awaiting my subjects"))
 
+@bot.event
+async def on_message(ctx):
+    # Check that message is not from self
+    if message.author != bot.user:
+        if "this is the way" in message.content.lower():
+            await ctx.send("This is the way")
+
 @bot.command()
 @commands.guild_only()
 async def info(ctx):
