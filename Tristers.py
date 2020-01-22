@@ -28,9 +28,10 @@ async def on_ready():
 @bot.event
 async def on_message(ctx):
     # Check that message is not from self
-    if message.author != bot.user:
-        if "this is the way" in message.content.lower():
-            await ctx.send("This is the way")
+    if ctx.author == bot.user:
+        return
+    if "this is the way" in ctx.content.lower():
+        await ctx.channel.send("This is the way")
 
 @bot.command()
 @commands.guild_only()
