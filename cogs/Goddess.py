@@ -10,6 +10,14 @@ class Goddess(commands.Cog):
         channel = member.guild.system_channel
         if channel is not None:
             await channel.send('Welcome {}, come to over me your praise?'.format(member))
+            
+    @commands.Cog.listener()
+    async def on_message(self,ctx):
+        # Check that message is not from self
+        if ctx.author == bot.user:
+            return
+        if "this is the way" in ctx.content.lower():
+            await ctx.channel.send("This is the way")
 
 def setup(bot):
     bot.add_cog(Goddess(bot))
