@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix='$',description=descript)
 initial_extension = [ # Add new cogs here
     'cogs.Japanese',
     "cogs.Goddess",
+    "cogs.gamble",
 ]
 
 @bot.event
@@ -24,6 +25,7 @@ async def on_ready():
         bot.load_extension(ext)
         print("Loaded {}".format(ext))
     await bot.change_presence(activity=discord.Game("Awaiting my subjects"))
+    print("Bot is ready for use")
 
 @bot.command()
 @commands.guild_only()
@@ -74,4 +76,6 @@ with open('token.txt','r') as f:
     lines = f.readlines()
     token = lines[0]
 
+print("Running Bot")
+print(token)
 bot.run(token)

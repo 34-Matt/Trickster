@@ -1,10 +1,11 @@
+VOWALS = ['a','i','u','e','o']
+
 def vowalOffset(vo):
     '''Determines the offset for a hiragana "vowal" in unicode. Used in singleHiragana.
     vo is the "vowal" of the hiragana character
 
     Returns the offset associated with vo
     '''
-
     if vo == 'a':
         return 1
     elif vo == 'i':
@@ -24,7 +25,6 @@ def conOffset(con):
 
     Returns the offset associated with con
     '''
-
     if con == 'k':
         return 9,2
     elif con == 'g':
@@ -69,7 +69,6 @@ def singleChar(letter,katakana):
 
     Returns the unicode of letter
     '''
-
     letNum = len(letter)
     if katakana:
         output = 12448
@@ -99,7 +98,7 @@ def singleChar(letter,katakana):
         # No 'wi'
         if (conOff == 't') and (vowalOff > 2):
             output -= 1
-        
+
         # Get character
         output += conOff + (multi * vowalOff)
         output = chr(output)
@@ -117,3 +116,40 @@ def singleChar(letter,katakana):
     #print(output)
     #print(letNum)
     return output
+
+def breakJapaneseWord(letters):
+    '''Takes in a full string of romanji characters and separates by character
+    letters is a series of romanji characters
+
+    Returns a list of separated romanji characters
+    Example: is letters="naka", return ["na","ka"]
+    '''
+    global VOWALS
+    # First split by spaces
+    firstPass = letters.split()
+    charArray = []
+    for letter in firstPass:
+
+        #Run through for each letter in subsection
+        curChar = ""
+        maxLength = len(letter)
+        for counter in range(maxLength):
+            curLetter = letter[counter]
+
+            #Always ends in a vowal or 'n'
+            if curLetter in VOWALS:
+                curChar += curLetter
+                charArray.append(curChar)
+                curChar = ""
+            elif curLetter == 'n' and not curChar:
+                #Only ends if next character is consonant or end of line
+                if counter >= maxLength-1:
+                    charArray.append(curLetter)
+                elif letter[counter+1] in VOWALS or letter[counter+1] == 'y':
+                    curChar += curLetter
+                else:
+                    charArray.append(curLetter)
+            else:
+                curChar += curLetter
+
+    return charArray

@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from cogs.JapaneseUtil import singleChar
+from cogs.JapaneseUtil import singleChar,breakJapaneseWord
 
 class Japanese(commands.Cog):
     def __init__(self,bot):
@@ -8,28 +8,32 @@ class Japanese(commands.Cog):
 
     @commands.command()
     async def Hiragana(self,ctx):
-        ''' Convert text to Hiragana. Need to manually add spaces in the romanji characters.
+        ''' Convert text to Hiragana.
 
-        $Hiragana ko n ba wa => こんばわ
+        $Hiragana konbawa => こんばわ
         '''
 
-        letters = ctx.message.content.split()[1:]
+        letters = ctx.message.content.split(maxsplit=1)[1]
+        letters = letters.lower()
+        letters = breakJapaneseWord(letters)
         message = ""
         for letter in letters:
-            message += singleChar(letter.lower(),False)
+            message += singleChar(letter,False)
         await ctx.send(message)
 
     @commands.command()
     async def Katakana(self,ctx):
-        ''' Convert text to Katakana. Need to manually add spaces in the romanji characters.
+        ''' Convert text to Katakana.
 
-        $Katakana ko n ba wa => コンバワ
+        $Katakana konbawa => コンバワ
         '''
-        
-        letters = ctx.message.content.split()[1:]
+
+        letters = ctx.message.content.split(maxsplit=1)[1]
+        letters = letters.lower()
+        letters = breakJapaneseWord(letters)
         message = ""
         for letter in letters:
-            message += singleChar(letter.lower(),True)
+            message += singleChar(letter,True)
         await ctx.send(message)
 
 def setup(bot):
