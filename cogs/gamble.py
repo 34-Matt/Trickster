@@ -18,7 +18,7 @@ class gamble(commands.Cog):
         self.scissor = np.asarray(Image.open("Images/Blue_Lance.png"))
 
     @commands.command()
-    async def rockpaperscissors(self,ctx):
+    async def roshambo(self,ctx):
         ''' Plays a game of rock-paper-scissors with the person
         '''
 

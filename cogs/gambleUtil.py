@@ -1,11 +1,11 @@
 from random import random
 
 def rpsConvertHumanChoice(humanInput):
-    if humanInput == "rock":
+    if humanInput in ["rocks","rock","r"]:
         return 1
-    elif humanInput == "paper":
+    elif humanInput in ["papers","paper","p"]:
         return 2
-    elif humanInput == "scissors":
+    elif humanInput in ["scissors","scissor","s"]:
         return 3
     else:
         return 0
