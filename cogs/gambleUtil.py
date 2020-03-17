@@ -7,7 +7,7 @@ def rpsConvertHumanChoice(humanInput):
         return 2
     elif humanInput == "scissors":
         return 3
-    else
+    else:
         return 0
 
 def rpsGetMachineChoice(humanInput):
@@ -21,10 +21,14 @@ def rpsGetMachineChoice(humanInput):
         machine = 3
     elif machine < 95:
         cheat = -1
-        machine = (humanInput % 3) - 1
+        machine = humanInput - 1 
+        if machine == 0:
+            machine = 3
     else:
         cheat = 1
-        machine = (humanInput % 3) + 1
+        machine = humanInput + 1
+        if machine == 4:
+            machine = 1
     return machine,cheat
 
 def rpsGetWinner(human,machine):
@@ -33,13 +37,3 @@ def rpsGetWinner(human,machine):
         return -1
     else:
         return diff
-
-def rpsName(choice):
-    if choice == 1:
-        return "Rock","./Images/Green_Axe.png"
-    elif choice == 2:
-        return "Paper","./Images/Red_Sword.png"
-    elif choice == 3:
-        return "Scissors","./Images/Blue_Sword.png"
-    else
-        return "Invalid"

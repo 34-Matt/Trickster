@@ -152,4 +152,4 @@ def breakJapaneseWord(letters):
             else:
                 curChar += curLetter
 
-        return charArray
+    return charArray

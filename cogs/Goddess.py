@@ -14,7 +14,7 @@ class Goddess(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self,ctx):
         # Check that message is not from self
-        if ctx.author == bot.user:
+        if ctx.author == self.bot.user:
             return
         if "this is the way" in ctx.content.lower():
             await ctx.channel.send("This is the way")
