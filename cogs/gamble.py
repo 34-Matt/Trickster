@@ -10,11 +10,8 @@ import io
 class gamble(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
-        #self.rock = cv2.imread("Images/Red_Sword.png")
-        #self.paper = cv2.imread("Images/Green_Axe.png")
-        #self.scissor = cv2.imread("Images/Blue_Lance.png")
-        self.rock = np.asarray(Image.open("Images/Red_Sword.png"))
-        self.paper = np.asarray(Image.open("Images/Green_Axe.png"))
+        self.paper = np.asarray(Image.open("Images/Red_Sword.png"))
+        self.rock = np.asarray(Image.open("Images/Green_Axe.png"))
         self.scissor = np.asarray(Image.open("Images/Blue_Lance.png"))
 
     @commands.command()

@@ -1,4 +1,4 @@
 #!/bin/sh
 #launcher.sh
-source DiscordPy/bin/activate
-nohup python Trickster.py &
+git pull
+nohup python3 Trickster.py &
