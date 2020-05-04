@@ -2,6 +2,8 @@ import discord
 from discord.ext import commands
 from random import choice
 
+from Util.sqlManager import *
+
 # About the bot
 descript = 'Have you come to behold my brilliance. Very well, you have my permission.'
 
@@ -32,7 +34,7 @@ async def on_ready():
 async def info(ctx):
     # Creates an embed that discribes the bot
     embed = discord.Embed(title="Greetings",description=descript,color=0xf5e85d)
-    
+
     embed.add_field(name="Name",value="Mayu")
     embed.add_field(name="Server count",value=f"{len(bot.guilds)}")
     embed.add_field(name="Invite",value="[Invite link](https://discordapp.com/oauth2/authorize?&client_id=347549865854763008&scope=bot&permissions=8)")
@@ -71,11 +73,18 @@ async def unload(ctx):
         print("{} cannot be unloaded. [{}]".format(extension,error))
         await ctx.send("Who do you think I am to command me as such!")
 
-# Run bot
+# Read startup info
 with open('token.txt','r') as f:
     lines = f.readlines()
     token = lines[0]
+    user = lines[1]
+    passwd = lines[2]
+    database = lines[3]
 
+# Setup SQL
+sqlMan = sqlMan = sqlManager(user,passwd,database)
+
+# Run Bot
 print("Running Bot")
 print(token)
 bot.run(token)
