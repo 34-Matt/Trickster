@@ -63,8 +63,8 @@ class gamble(commands.Cog):
             color=0xf5e85d)
         embed.set_thumbnail(url="attachment://rpsResult.png")
         embed.add_field(name=rTitle,value = result,inline=False)
-        embed.add_field(name="Your Choise",value=hString,inline=True)
-        embed.add_field(name="My Choise",value=mString,inline=True)
+        embed.add_field(name="Your Choice",value=hString,inline=True)
+        embed.add_field(name="My Choice",value=mString,inline=True)
         await ctx.send(file=file,embed=embed)
         
     def rpsName(self,choice):
