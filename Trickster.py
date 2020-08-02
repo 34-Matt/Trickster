@@ -12,6 +12,7 @@ initial_extension = [ # Add new cogs here
     'cogs.Japanese',
     "cogs.Goddess",
     "cogs.gamble",
+    "cogs.Exchange",
 ]
 
 @bot.event
@@ -32,7 +33,7 @@ async def on_ready():
 async def info(ctx):
     # Creates an embed that discribes the bot
     embed = discord.Embed(title="Greetings",description=descript,color=0xf5e85d)
-    
+
     embed.add_field(name="Name",value="Mayu")
     embed.add_field(name="Server count",value=f"{len(bot.guilds)}")
     embed.add_field(name="Invite",value="[Invite link](https://discordapp.com/oauth2/authorize?&client_id=347549865854763008&scope=bot&permissions=8)")
