@@ -1,21 +1,17 @@
 import discord
 from discord.ext import commands
 from forex_python.converter import CurrencyRates
-
+from datetime import date
 
 class Exchange(commands.Cog):
     def __init__(self,bot):
         self.bot = bot
 
-        with open('token.txt','r') as f:
-            lines = f.readlines()
-            token = lines[4]
-
         self.exchangeNames = {
             "EUR":["eur","euro member countries"],
             "IDR":["idr","indonesia rupiah"],
             "BGN":["bgn","bulgaria lev"],
-            "ILS";["ils","israel shekel"],
+            "ILS":["ils","israel shekel"],
             "GBP":["gbp","united kingdom pound"],
             "DKK":["dkk","denmark krone"],
             "CAD":["cad","canada dollar"],
@@ -33,19 +29,20 @@ class Exchange(commands.Cog):
 
         letters = ctx.message.content.split(maxsplit=1)[1]
         letters = letters.lower()
-        letters.split("to")
+        letters = letters.split("to")
 
         fromAddress = letters[0].strip()
         toAddress = letters[1].strip()
         fromID = self.getAddressName(fromAddress)
         toID = self.getAddressName(toAddress)
+        print(letters)
 
         if fromID == -1:
             await ctx.send("Was unable to find currency for {}".format(fromAddress))
         elif toID == -1:
             await ctx.send("Was unable to find currency for {}".format(toAddress))
         else:
-            rate = self.CurrencyRates.get_rates(fromID,toID)
+            rate = self.CurrencyRates.get_rate(fromID,toID)
             await ctx.send("The exchange rate from {} to {} is {}".format(fromID,toID,rate))
 
     def getAddressName(self,address):
@@ -63,4 +60,4 @@ class Exchange(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Japanese(bot))
+    bot.add_cog(Exchange(bot))
