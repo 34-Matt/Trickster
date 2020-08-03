@@ -16,7 +16,30 @@ class Exchange(commands.Cog):
             "DKK":["dkk","denmark krone"],
             "CAD":["cad","canada dollar"],
             "JPY":["jpy","japan yen"],
-            "USD":["usd","united states dollar"]
+            "HUF":["huf","hungary forint"],
+            "RON":["ron","Romania New Leu"],
+            "MYR":["myr","malaysia ringgit"],
+            "SEK":["sek","sweden krona"],
+            "SGD":["sgd","singapore dollar"],
+            "HKD":["hkd","hong kong dollar"],
+            "AUD":["aud","australia dollar"],
+            "CHF":["chf","switzerland franc"],
+            "KRW":["krw","korea won","korea south won"],
+            "CNY":["cny","china yun renminbi"],
+            "TRY":["try","turkey lira"],
+            "HRK":["hrk","croatia kuna"],
+            "NZD":["nzd","new zealand dollar"],
+            "THB":["thb","thailand baht"],
+            "USD":["usd","united states dollar"],
+            "NOK":["nok","norway krone"],
+            "RUB":["rub","russia ruble"],
+            "INR":["inr","india ruppe"],
+            "MXN":["mxn","mexico peso"],
+            "CZK":["czh","czech republic koruna"],
+            "BRL":["brl","brazil real"],
+            "PLN":["pln","poland zloty"],
+            "PHP":["php","philippines peso"],
+            "ZAR":["zar","south africa rand"]
         }
         self.CurrencyRates = CurrencyRates()
 
@@ -35,6 +58,8 @@ class Exchange(commands.Cog):
         toAddress = letters[1].strip()
         fromID = self.getAddressName(fromAddress)
         toID = self.getAddressName(toAddress)
+        fromCode = self.exchangeNames.get_currency_name(fromID)
+        toCode = self.exchangeNames.get_currency_name(toID)
         print(letters)
 
         if fromID == -1:
@@ -43,7 +68,7 @@ class Exchange(commands.Cog):
             await ctx.send("Was unable to find currency for {}".format(toAddress))
         else:
             rate = self.CurrencyRates.get_rate(fromID,toID)
-            await ctx.send("The exchange rate from {} to {} is {}".format(fromID,toID,rate))
+            await ctx.send("The exchange rate from {}1 {} is {}{:.2f} {}".format(fromCode,fromID,toCode,rate,toID))
 
     def getAddressName(self,address):
         '''Gets the proper address name for desired currency
