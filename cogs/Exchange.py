@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from forex_python.converter import CurrencyRates
+from forex_python.converter import CurrencyRates,CurrencyCodes
 from datetime import date
 
 class Exchange(commands.Cog):
@@ -42,6 +42,7 @@ class Exchange(commands.Cog):
             "ZAR":["zar","south africa rand"]
         }
         self.CurrencyRates = CurrencyRates()
+        self.CurrencyCodes = CurrencyCodes()
 
     @commands.command()
     async def ExchangeRate(self,ctx):
@@ -58,9 +59,8 @@ class Exchange(commands.Cog):
         toAddress = letters[1].strip()
         fromID = self.getAddressName(fromAddress)
         toID = self.getAddressName(toAddress)
-        fromCode = self.exchangeNames.get_currency_name(fromID)
-        toCode = self.exchangeNames.get_currency_name(toID)
-        print(letters)
+        fromCode = self.CurrencyCodes.get_symbol(fromID)
+        toCode = self.CurrencyCodes.get_symbol(toID)
 
         if fromID == -1:
             await ctx.send("Was unable to find currency for {}".format(fromAddress))
@@ -68,7 +68,7 @@ class Exchange(commands.Cog):
             await ctx.send("Was unable to find currency for {}".format(toAddress))
         else:
             rate = self.CurrencyRates.get_rate(fromID,toID)
-            await ctx.send("The exchange rate from {}1 {} is {}{:.2f} {}".format(fromCode,fromID,toCode,rate,toID))
+            await ctx.send("The exchange rate from {}1 is {}{:.2f}".format(fromCode,toCode,rate))
 
     def getAddressName(self,address):
         '''Gets the proper address name for desired currency
