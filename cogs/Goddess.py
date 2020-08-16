@@ -9,8 +9,8 @@ class Goddess(commands.Cog):
     async def on_member_join(self,member):
         channel = member.guild.system_channel
         if channel is not None:
-            await channel.send('Welcome {}, come to over me your praise?'.format(member))
-            
+            await channel.send('Welcome {}, have you come to offer me your praise?'.format(member))
+
     @commands.Cog.listener()
     async def on_message(self,ctx):
         # Check that message is not from self
