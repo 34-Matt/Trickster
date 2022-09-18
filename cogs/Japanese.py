@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from cogs.JapaneseUtil import singleChar,breakJapaneseWord
+from util.JapaneseUtil import singleChar,breakJapaneseWord
 
 class Japanese(commands.Cog):
     def __init__(self,bot):

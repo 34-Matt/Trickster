@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from cogs.gambleUtil import *
+from util.gambleUtil import *
 
 #import cv2
 from PIL import Image
